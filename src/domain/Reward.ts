@@ -1,6 +1,7 @@
 import { Address, BigInt, BigDecimal, log } from '@graphprotocol/graph-ts'
 import { CfgRewardRate } from '../../generated/Block/CfgRewardRate'
 import {
+  Account,
   DailyInvestorTokenBalance,
   Pool,
   PoolAddresses,
@@ -101,6 +102,11 @@ export function calculateRewards(date: BigInt, pool: Pool): void {
     let account = accounts[i]
     let ditb = DailyInvestorTokenBalance.load(account.concat(pool.id).concat(date.toString()))
     let reward = loadOrCreateRewardBalance(ditb.account)
+
+    let accountEntity = Account.load(account);
+    if (accountEntity != null && accountEntity.hasLinkedCfgAccount == false) {
+      continue;
+    }
 
     updateInvestorRewardsByToken(
       <PoolAddresses>tokenAddresses,
