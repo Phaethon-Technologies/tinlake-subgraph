@@ -32,6 +32,8 @@ dataSources:
           file: ./abis/NavFeed.json
         - name: NftFeed
           file: ./abis/NftFeed.json
+        - name: RestrictedToken
+          file: ./abis/RestrictedToken.json
         - name: Shelf
           file: ./abis/Shelf.json
         - name: PoolRegistry
@@ -87,6 +89,8 @@ dataSources:
           file: ./abis/PoolRegistry.json
         - name: Assessor
           file: ./abis/Assessor.json
+        - name: RestrictedToken
+          file: ./abis/RestrictedToken.json
       eventHandlers:
         - event: PoolCreated(address,bool,string,string)
           handler: handlePoolCreated
@@ -134,6 +138,8 @@ templates:
           file: ./abis/Assessor.json
         - name: Pile
           file: ./abis/Pile.json
+        - name: RestrictedToken
+          file: ./abis/RestrictedToken.json
       callHandlers:
         - function: executeEpoch()
           handler: handleCoordinatorExecuteEpoch

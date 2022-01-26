@@ -2,6 +2,7 @@ import { log, BigInt, Address, ethereum, dataSource } from '@graphprotocol/graph
 import { Assessor } from '../../generated/Block/Assessor'
 import { NavFeed } from '../../generated/Block/NavFeed'
 import { Reserve } from '../../generated/Block/Reserve'
+import { RestrictedToken } from '../../generated/Block/RestrictedToken'
 import { Pool, PoolAddresses, Day, DailyPoolData } from '../../generated/schema'
 import { ExecuteEpochCall } from '../../generated/templates/Coordinator/Coordinator'
 import { seniorToJuniorRatio } from '../util/pool'
@@ -62,6 +63,7 @@ export function updatePoolValues(poolId: string, block: ethereum.Block, today: D
   let juniorPrice = assessor.try_calcJuniorTokenPrice(pool.assetValue, pool.reserve)
   let seniorPrice = assessor.try_calcSeniorTokenPrice(pool.assetValue, pool.reserve)
 
+  pool.totalSupply = RestrictedToken.totalSupply()
   pool.seniorTokenPrice = !seniorPrice.reverted ? seniorPrice.value : BigInt.fromI32(0)
   pool.juniorTokenPrice = !juniorPrice.reverted ? juniorPrice.value : BigInt.fromI32(0)
 

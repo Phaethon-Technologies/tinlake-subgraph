@@ -15,6 +15,7 @@ type Pool @entity {
   maxReserve: BigInt!
   seniorTokenPrice: BigInt! # assessor
   juniorTokenPrice: BigInt! # assessor
+  totalSupply: BigInt!
   juniorYield30Days: BigInt
   seniorYield30Days: BigInt
   juniorYield90Days: BigInt
